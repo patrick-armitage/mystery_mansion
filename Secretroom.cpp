@@ -112,14 +112,17 @@ bool Secretroom::checkRoom() {
 
 bool Secretroom::makeSecretChoice() {
     int selection;
+    char sel;
     cout << "What do you want to do?\n";
     cout << "[1] " << getSecretChoice() << "\n";
     cout << "[2] Go back to menu\n";
 
-    cin >> selection;
+    cin >> sel;
+    selection = sel - '0';
     while ((selection < 1) || (selection > 2)) {
         cout << "That's not one of the options!!  Try again: ";
-        cin >> selection;
+        cin >> sel;
+        selection = sel - '0';
     }
 
     if (selection == 1) {

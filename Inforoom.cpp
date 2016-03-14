@@ -73,14 +73,17 @@ bool Inforoom::checkRoom() {
 
 void Inforoom::makeInfoChoice() {
     int selection;
+    char sel;
     cout << "What do you want to do?\n";
     cout << "[1] " << getInfoChoice() << "\n";
     cout << "[2] Go back to menu\n";
 
-    cin >> selection;
+    cin >> sel;
+    selection = sel - '0';
     while ((selection < 1) || (selection > 2)) {
         cout << "That's not one of the options!!  Try again: ";
-        cin >> selection;
+        cin >> sel;
+        selection = sel - '0';
     }
 
     if (selection == 1) {

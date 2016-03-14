@@ -124,18 +124,20 @@ void Traveler::useInventoryItem(Mansion *mansion, Room *room) {
 
 TREASURES Traveler::selectInventoryItem() {
     vector<TREASURES> *inv = getInventory();
-    TREASURES item;
     int selection;
+    char sel;
 
     cout << endl;
     for (int i = 0; i < inv->size(); i++) {
         cout << "[" << i + 1 << "] " << getTreasureName(inv->at(i)) << "\n";
     }
 
-    cin >> selection;
+    cin >> sel;
+    selection = sel - '0';
     while ((selection < 1) || (selection > inv->size())) {
         cout << "That's not an item in your inventory, " << getTravelerName() << "!  Try again: ";
-        cin >> selection;
+        cin >> sel;
+        selection = sel - '0';
     }
 
     return inv->at(selection - 1);

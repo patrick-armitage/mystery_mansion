@@ -38,6 +38,7 @@ void displayRoomOptions(Mansion *mansion, Traveler *trav) {
         return;
     }
 
+    char sel;
     int selection;
     do {
         cout << "\nWhat do you want to do?\n";
@@ -45,10 +46,12 @@ void displayRoomOptions(Mansion *mansion, Traveler *trav) {
         cout << "[2] Use an inventory item\n";
         cout << "[3] Move to another room\n";
         cout << "[4] Need a clue!\n";
-        cin >> selection;
+        cin >> sel;
+        selection = sel - '0';
         while ((selection < 1) || (selection > 4)) {
             cout << "Yo!  That isn't one of the options here!!  Let's try that again: ";
-            cin >> selection;
+            cin >> sel;
+            selection = sel - '0';
         }
 
         if (selection == 1) {
@@ -123,6 +126,7 @@ void changeRoom(Traveler *trav, Room *nextRm) {
 */
 Room *getTravelChoice(Mansion *mansion, Traveler *trav) {
     int selection, rmCount = 0;
+    char sel;
     Room *currRm = trav->getCurrentRoom();
     Room *rooms[4];
     Room *temp;
@@ -165,10 +169,12 @@ Room *getTravelChoice(Mansion *mansion, Traveler *trav) {
         }
     }
 
-    cin >> selection;
+    cin >> sel;
+    selection = sel - '0';
     while ((selection < 1) || (selection > rmCount)) {
         cout << "Not a valid choice!  Please select one of the " << rmCount << " listed rooms: ";
-        cin >> selection;
+        cin >> sel;
+        selection = sel - '0';
     }
 
     return *(rooms + (selection-1));
