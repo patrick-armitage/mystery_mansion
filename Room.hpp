@@ -20,7 +20,6 @@ class Room {
  protected:
     ROOM_TYPE roomType;
     string roomName;
-    Room *previousRoom;
     Room *northRoom;
     Room *westRoom;
     Room *southRoom;
@@ -31,7 +30,6 @@ class Room {
     Room(string roomName);
     void setRoomType(ROOM_TYPE);
     void setRoomName(string roomName);
-    void setPreviousRoom(Room *prevRoom);
     void setAllRooms(Room *north, Room *west, Room *south, Room *east);
     void setNorthRoom(Room *northRoom);
     void setWestRoom(Room *westRoom);
@@ -41,7 +39,6 @@ class Room {
     void setVisited(bool visited);
     ROOM_TYPE getRoomType();
     string getRoomName();
-    Room *getPreviousRoom();
     Room *getNorthRoom();
     Room *getWestRoom();
     Room *getSouthRoom();
