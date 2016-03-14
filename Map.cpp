@@ -226,7 +226,7 @@ Passagewayroom *createLibrary() {
     Passagewayroom *library = new Passagewayroom("Library");
     library->setCorrectItem(SHOTGUN);
     const char *description =
-        "As you enter the attic, you discover the source of that strange organ music!\n"
+        "As you enter the Library, you discover the source of that strange organ music!\n"
         "In the center of the room sits a giant brass organ, the keys move by themselves.  Spooky!\n\n"
         RED "It's blaring that awful music so loud it's deafening!!!\n\n" RESET
         "You scan the room for anything interesting...  Looks like just a bunch of walls filled \n"
