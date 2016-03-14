@@ -88,7 +88,7 @@ void Puzzleroom::describeWrongItem() {
 
     const char *reaction = RED "Caw!  Caw!  Caw!  Caw!  Caw!  Caw!  Caw!  Caw!\n" RESET;
     for (int i = 0; i < 100; i++) {
-        timedMessage(string(reaction, 0, 100), 50000);
+        timedMessage(string(reaction, 0, 100), 30000);
     }
 
     const char *notAgain =

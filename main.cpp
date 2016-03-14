@@ -27,6 +27,8 @@ int main() {
         }
         displayRoomOptions(mansion, trav);
     }
+    Room *outside = getOutside(mansion);
+    outside->describe();
 
     return 0;
 }

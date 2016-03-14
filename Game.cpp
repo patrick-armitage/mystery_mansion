@@ -6,6 +6,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <algorithm>
+#include <vector>
 #include <iostream>
 #include <string>
 #include "Utils.hpp"
@@ -18,6 +20,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
+using std::find;
+using std::vector;
 
 /*----------------------------------------------------------------------------*/
 /*
@@ -40,8 +44,9 @@ void displayRoomOptions(Mansion *mansion, Traveler *trav) {
         cout << "[1] Check out the " << room->getRoomName() << "\n";
         cout << "[2] Use an inventory item\n";
         cout << "[3] Move to another room\n";
+        cout << "[4] Need a clue!\n";
         cin >> selection;
-        while ((selection < 1) || (selection > 3)) {
+        while ((selection < 1) || (selection > 4)) {
             cout << "Yo!  That isn't one of the options here!!  Let's try that again: ";
             cin >> selection;
         }
@@ -54,6 +59,8 @@ void displayRoomOptions(Mansion *mansion, Traveler *trav) {
             }
         } else if (selection == 2) {
             trav->useInventoryItem(mansion, room);
+        } else if (selection == 4) {
+            giveClue(mansion, trav);
         }
     } while (selection != 3);
 
@@ -179,6 +186,44 @@ bool checkRoomRevealed(Mansion *mansion, Room *currRm, Room *checkRm) {
     }
 
     return revealed;
+}
+
+void giveClue(Mansion *mansion, Traveler *trav) {
+    vector<TREASURES> *inv = trav->getInventory();
+    const char *msg;
+
+    Outsideroom *oRoom = getOutsideRoom(mansion, "Outside");
+    if (oRoom->getIsLocked() == false) {
+        cout << "What do you need a clue for?  You're home free, buster!  \n";
+        cout << "You can finally escape this miserable madhouse!!!\n";
+        return;
+    }
+
+    if (!inv->empty()) {
+        if (find(inv->begin(), inv->end(), KEY) != inv->end()) {
+            msg =
+                "Now you've got this golden Key!  There must be a locked door around here \n"
+                "you can " YELLOW "use it in!\n" RESET;
+            cout << msg;
+        } else if (find(inv->begin(), inv->end(), BIRDSEED) != inv->end()) {
+            msg =
+                "Well, there's this bag of Birdseed you've been holding onto...\n"
+                "Doesn't anybody " YELLOW "want this stuff?\n" RESET;
+            cout << msg;
+        } else if (find(inv->begin(), inv->end(), SHOTGUN) != inv->end()) {
+            msg =
+                "We found this awesome Shotgun!  Don't you think that "
+                YELLOW "shooting it at something \n" RESET
+                "could possibly lead us to the next clue?\n";
+            cout << msg;
+        }
+    } else {
+        msg =
+            "You haven't looked around here much, maybe you could start by "
+            YELLOW "checking all the rooms.\n\n"
+            MAGENTA "\"I gotta get outta here somehow!...\"\n" RESET;
+        cout << msg;
+    }
 }
 
 void printGameIntro() {

@@ -18,6 +18,7 @@ void makeMove(Mansion *mansion, Traveler *traveler);
 Room *getTravelChoice(Mansion *mansion, Traveler *traveler);
 bool checkRoomRevealed(Mansion *mansion, Room *currRoom, Room *checkRoom);
 void changeRoom(Traveler *traveler, Room *nextRoom);
+void giveClue(Mansion *mansion, Traveler *traveler);
 void printGameIntro();
 
 #endif
