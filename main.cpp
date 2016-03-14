@@ -1,3 +1,4 @@
+#include <string>
 #include <iostream>
 #include "Room.hpp"
 #include "Traveler.hpp"
@@ -7,19 +8,29 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::string;
 
 int main() {
-    Mansion *mansion = createMansion();
-    Traveler *trav = new Traveler("Pete");
-
-    cout << "Welcome, " << trav->getTravelerName() << " to MYSTERY MANSION!" << endl << endl;
     printGameIntro();
+    cout << "Welcome to MYSTERY MANSION!" << endl << endl;
+
+    string name;
+    cout << "What is your name, traveler? ";
+    cin >> name;
+
+    while (name == "") {
+        cout << "That's not your name!  Come on now, tell us your name! ";
+        cin >> name;
+    }
+
+    Mansion *mansion = createMansion();
+    Traveler *trav = new Traveler(name);
 
     changeRoom(trav, getGrandFoyer(mansion));
     timedMessage("You walk through the front door, and...\n\n", 500000);
     timedMessage("BANG!!!!\n\n", 800000);
-    timedMessage("The door has slammed shut behind you!\n", 500000);
-    timedMessage("You try to open it...locked!\n\n", 700000);
+    timedMessage("The door has slammed shut behind you!\n", 700000);
+    timedMessage("You try to open it...locked!\n\n", 1000000);
 
     while (trav->getCurrentRoom()->getRoomType() != OUTSIDE) {
         if (trav->getCurrentRoom() != trav->getPreviousRoom()) {
