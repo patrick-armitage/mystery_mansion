@@ -27,10 +27,6 @@ Secretroom::Secretroom(string name) : Room(name) {
     setTreasureFound(false);
 }
 
-void Secretroom::setDiscovered(bool disc) {
-    discovered = disc;
-}
-
 void Secretroom::setTreasureFound(bool found) {
     treasureFound = found;
 }
@@ -49,10 +45,6 @@ void Secretroom::setTreasureDescription(string desc) {
 
 void Secretroom::setTreasure(TREASURES t) {
     treasure = t;
-}
-
-bool Secretroom::getDiscovered() {
-    return discovered;
 }
 
 bool Secretroom::getTreasureFound() {
@@ -83,12 +75,6 @@ string Secretroom::getTreasureDescription() {
     What the function does:
 */
 void Secretroom::describe() {
-    if (getDiscovered() == false) {
-        string msg = "You've discovered a secret room!!!!  The " + getRoomName() + "!\n";
-        cout << YELLOW << msg << RESET;
-        setDiscovered(true);
-    }
-
     string description = getDescription();
     cout << description << endl;
 

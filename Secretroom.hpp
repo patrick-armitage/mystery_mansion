@@ -17,7 +17,6 @@ using std::string;
 
 class Secretroom : public Room {
  private:
-    bool discovered;
     bool treasureFound;
     string secretDescription;
     string secretChoice;
@@ -25,13 +24,11 @@ class Secretroom : public Room {
     TREASURES treasure;
  public:
     Secretroom(string name);
-    void setDiscovered(bool discovered);
     void setTreasureFound(bool found);
     void setSecretDescription(string description);
     void setSecretChoice(string secretChoice);
     void setTreasureDescription(string description);
     void setTreasure(TREASURES treasure);
-    bool getDiscovered();
     bool getTreasureFound();
     string getSecretDescription();
     string getSecretChoice();

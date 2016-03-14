@@ -189,7 +189,6 @@ Puzzleroom *createCourtyard() {
 
 Secretroom *createArmory() {
     Secretroom *armory = new Secretroom("Armory");
-    armory->setDiscovered(true);
 
     const char *description =
         "As you walk into the armory, you are greeted with an array of all things combat and war\n"
