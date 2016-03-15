@@ -11,6 +11,7 @@ using std::endl;
 using std::string;
 
 int main() {
+    /* Introduction */
     printGameIntro();
     cout << "Welcome to MYSTERY MANSION!" << endl << endl;
 
@@ -23,6 +24,7 @@ int main() {
         cin >> name;
     }
 
+    /* Game Setup */
     Mansion *mansion = createMansion();
     Traveler *trav = new Traveler(name);
 
@@ -32,12 +34,15 @@ int main() {
     timedMessage("The door has slammed shut behind you!\n", 700000);
     timedMessage("You try to open it...locked!\n\n", 1000000);
 
+    /* Game Loop */
     while (trav->getCurrentRoom()->getRoomType() != OUTSIDE) {
         if (trav->getCurrentRoom() != trav->getPreviousRoom()) {
             trav->getCurrentRoom()->describe();
         }
         displayRoomOptions(mansion, trav);
     }
+
+    /* Game Ending */
     Room *outside = getOutside(mansion);
     outside->describe();
 

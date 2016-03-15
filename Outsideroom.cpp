@@ -25,6 +25,13 @@ Outsideroom::Outsideroom(string name) : Room(name) {
     setIsLocked(true);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setIsLocked, getIsLocked
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Inforoom class's private attribute methods
+*/
 void Outsideroom::setIsLocked(bool locked) {
     isLocked = locked;
 }
@@ -37,12 +44,18 @@ bool Outsideroom::getIsLocked() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: prints message that user made it outside
 */
 void Outsideroom::describe() {
     cout << "Breathe the fresh air!  You've made it outside!!!!" << endl;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: returns false (dummy function)
+*/
 bool Outsideroom::checkRoom() {
     return false;
 }

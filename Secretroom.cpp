@@ -17,16 +17,24 @@ using std::string;
 /*--------------------------------------------------------------------------------*/
 /*
     Function Name: Secretroom
-    Function Parameters: creature's name string
+    Function Parameters: room's name string
     What the function does: initializes a new instance of the Secretroom subclass,
-                            setting its type, strengthPts, armorPts, attackDieSides,
-                            numAttackDice, and numDefenseDice to Secretroom defaults
+                            setting room type to SECRET and treasure found to false
 */
 Secretroom::Secretroom(string name) : Room(name) {
     setRoomType(SECRET);
     setTreasureFound(false);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setTreasureFound, setSecretDescription, setSecretChoice, setTreasure,
+                    setTreasureDescription, getTreasureFound, getSecretDescription, getSecretChoice,
+                    getTreasure, getTreasureDescription
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Secretroom class's private attribute methods
+*/
 void Secretroom::setTreasureFound(bool found) {
     treasureFound = found;
 }
@@ -72,7 +80,9 @@ string Secretroom::getTreasureDescription() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: pure virtual function; prints description and, if treasure
+                            found is false, prints green message saying there are
+                            interesting things in the room
 */
 void Secretroom::describe() {
     string description = getDescription();
@@ -83,6 +93,15 @@ void Secretroom::describe() {
     }
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function; if treasure found is false,
+                            prints secret description, and prompts user to make
+                            secret choice, returning choice, else prints message
+                            that there's nothing else here, and returns false
+*/
 bool Secretroom::checkRoom() {
     if (getTreasureFound() == false) {
         cout << getSecretDescription();
@@ -96,6 +115,16 @@ bool Secretroom::checkRoom() {
     return false;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: makeInfoChoice
+    Function Parameters: n/a
+    What the function does: presents user with option to investigate secret or return
+                            to main menu.  If they select to investigate, prints
+                            secret description and prompts user with secret choice
+                            menu, and if they press further, calls discoverSecret
+                            and returns true, else returns false
+*/
 bool Secretroom::makeSecretChoice() {
     int selection;
     char sel;
@@ -119,6 +148,12 @@ bool Secretroom::makeSecretChoice() {
     return false;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: discoverSecret
+    Function Parameters: n/a
+    What the function does: prints treasure description
+*/
 void Secretroom::discoverSecret() {
     cout << getTreasureDescription();
 }

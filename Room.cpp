@@ -2,7 +2,7 @@
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
 ** Description: Room methods file which defines the methods of the
-** Room class that were prototyped within the GameBoard header file
+** Room class that were prototyped within the Room header file
 *******************************************************************************/
 
 #include <string>
@@ -19,8 +19,8 @@ using std::endl;
     Function Name: Room
     Function Parameters: Room's name string
     What the function does: initializes a new instance of the Room class,
-                            setting room name and also setting stillAlive
-                            boolean to true
+                            setting room name and also setting visited
+                            boolean to false and all rooms to NULL
 */
 Room::Room(string name) {
     setRoomName(name);
@@ -30,8 +30,10 @@ Room::Room(string name) {
 
 /*---------------------------------------------------------------------------------------*/
 /*
-    Function Names: setRoomType, setRoomName
-                    getRoomType, getRoomName
+    Function Names: setRoomType, setRoomName, setNorthRoom, setSouthRoom, setEastRoom,
+                    setWestRoom, setDescription, setVisited,  getRoomType, getRoomName,
+                    getNorthRoom, getSouthRoom, getEastRoom, getWestRoom, getDescription,
+                    getVisited
     Functions' Parameters: setters use corresponding values of data members
     What the functions do: getters and setters which act as public options to
                            read/write the Room class's private attribute methods
@@ -106,15 +108,3 @@ string Room::getDescription() {
 bool Room::getVisited() {
     return visited;
 }
-
-/*----------------------------------------------------------------------------*/
-/*
-    Function Name: tryAttack
-    Function Parameters: attacking and defending Rooms' pointers
-    What the function does: gets the two rooms' types and name strings, and
-                            before executing the attack roll, checks the types
-                            to see if there are any special cases occurring.
-                            If the type is Medusa, we must check to see if she
-                            will glare, and if type is Vampire, the vamp may
-                            charm the opponent
-*/

@@ -15,10 +15,10 @@ using std::endl;
 /*--------------------------------------------------------------------------------*/
 /*
     Function Name: Hiddenroom
-    Function Parameters: creature's name string
+    Function Parameters: room's name string
     What the function does: initializes a new instance of the Hiddenroom subclass,
-                            setting its type, strengthPts, armorPts, attackDieSides,
-                            numAttackDice, and numDefenseDice to Hiddenroom defaults
+                            setting its type to HIDDENROOM, revealed to false, and
+                            treasure found to false
 */
 Hiddenroom::Hiddenroom(string name) : Room(name) {
     setRoomType(HIDDEN);
@@ -26,6 +26,14 @@ Hiddenroom::Hiddenroom(string name) : Room(name) {
     setTreasureFound(false);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setHiddenRevealed, setTreasure, setTreasureFound, setTreasureDescription,
+                    getHiddenRevealed, getTreasure, getTreasureFound, getTreasureDescription
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Hiddenroom class's private attribute methods
+*/
 void Hiddenroom::setHiddenRevealed(bool revealed) {
     hiddenRevealed = revealed;
 }
@@ -62,7 +70,7 @@ string Hiddenroom::getTreasureDescription() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: pure virtual function that prints description
 */
 void Hiddenroom::describe() {
     if (getHiddenRevealed() == false) {
@@ -76,6 +84,15 @@ void Hiddenroom::describe() {
     cout << description << endl;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function that prints treasure description
+                            if treasure found is false and returns true, else prints
+                            generic message saying everything is found and returns
+                            false
+*/
 bool Hiddenroom::checkRoom() {
     if (getTreasureFound() == false) {
         cout << getTreasureDescription();

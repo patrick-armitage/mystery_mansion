@@ -1,7 +1,8 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description:
+** Description: Traveler header file declaring the methods that will be defined
+** within Traveler.cpp
 *******************************************************************************/
 
 #include <vector>

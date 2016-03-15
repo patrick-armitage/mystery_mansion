@@ -25,6 +25,14 @@ Inforoom::Inforoom(string name) : Room(name) {
     setRoomType(INFO);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setInfoDescription, setInfoChoice, setInfo, getInfoDescription,
+                    getInfochoice, getInfo
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Inforoom class's private attribute methods
+*/
 void Inforoom::setInfoDescription(string description) {
     infoDescription = description;
 }
@@ -53,7 +61,8 @@ string Inforoom::getInfo() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: prints generic message that player can learn info,
+                            then prints description and returns
 */
 void Inforoom::describe() {
     cout << "This room is a dead end, you can go back if you like, ";
@@ -63,6 +72,14 @@ void Inforoom::describe() {
     cout << description << endl;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function that prints description and
+                            presents user the choice to investigate information,
+                            then returns false
+*/
 bool Inforoom::checkRoom() {
     cout << getInfoDescription();
 
@@ -71,6 +88,14 @@ bool Inforoom::checkRoom() {
     return false;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: makeInfoChoice
+    Function Parameters: n/a
+    What the function does: presents user with option to investigate info or return
+                            to main menu.  If they select to investigate, prints
+                            info description, else does nothing
+*/
 void Inforoom::makeInfoChoice() {
     int selection;
     char sel;

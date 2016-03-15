@@ -1,7 +1,8 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description:
+** Description: Game header file declaring the methods that will be defined
+** within Game.cpp
 *******************************************************************************/
 
 #include <string>

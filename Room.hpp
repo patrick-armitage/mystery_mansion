@@ -1,7 +1,8 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description:
+** Description: Room header file declaring the methods that will be defined
+** within Room.cpp.  Also defines ROOM_TYPE enum used throughout the game.
 *******************************************************************************/
 
 #include <stdio.h>

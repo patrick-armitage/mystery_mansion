@@ -1,7 +1,9 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description:
+** Description: Utils header file declaring the methods that will be defined
+** within Utils.cpp.  Also contains definitions of colors used for text
+** and the TREASURES enum used in nearly all of the classes in the game.
 *******************************************************************************/
 
 #include <string>

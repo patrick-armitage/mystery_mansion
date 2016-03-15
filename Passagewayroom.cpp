@@ -25,6 +25,14 @@ Passagewayroom::Passagewayroom(string name) : Room(name) {
     setPassageRevealed(false);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setPassageRevealed, setPassageDescription, setCorrectItem, setHiddenRoom
+                    getPassageRevealed, getPassageDescription, getCorrectItem, getHiddenRoom
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Passagewayroom class's private attribute methods
+*/
 void Passagewayroom::setPassageRevealed(bool revealed) {
     passageRevealed = revealed;
 }
@@ -61,7 +69,9 @@ Room *Passagewayroom::getHiddenRoom() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: prints description, and if passage revealed is false,
+                            prints yellow message suggesting the room is hiding
+                            something
 */
 void Passagewayroom::describe() {
     string description = getDescription();
@@ -72,6 +82,14 @@ void Passagewayroom::describe() {
     }
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function.  If passage revealed is false,
+                            prints passage description, else prints generic message
+                            saying the room is no longer hiding anything
+*/
 bool Passagewayroom::checkRoom() {
     if (getPassageRevealed() == false) {
         cout << getPassageDescription();

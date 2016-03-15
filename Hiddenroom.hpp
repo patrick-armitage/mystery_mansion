@@ -1,10 +1,9 @@
-/*******************************************************************************
+/*********************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description: Hiddenroom class prototypes, which inherit all data members,
-** getters and setters from the Room base class, and implements the virtual
-** functions attack, defend, charm and updateStrengthPts, and the constructor
-*******************************************************************************/
+** Description: Hiddenroom header file declaring the methods that will be defined
+** within Hiddenroom.cpp
+*********************************************************************************/
 
 #include <string>
 #include "Room.hpp"

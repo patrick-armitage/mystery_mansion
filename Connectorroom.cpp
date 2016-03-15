@@ -17,8 +17,7 @@ using std::endl;
     Function Name: Connectorroom
     Function Parameters: creature's name string
     What the function does: initializes a new instance of the Connectorroom subclass,
-                            setting its type, strengthPts, armorPts, attackDieSides,
-                            numAttackDice, and numDefenseDice to Connectorroom defaults
+                            setting its roomType to CONNECTOR
 */
 Connectorroom::Connectorroom(string name) : Room(name) {
     setRoomType(CONNECTOR);
@@ -28,13 +27,20 @@ Connectorroom::Connectorroom(string name) : Room(name) {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: pure virtual function that prints description
 */
 void Connectorroom::describe() {
     string description = getDescription();
     cout << description << endl;
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function that prints generic message and
+                            returns false
+*/
 bool Connectorroom::checkRoom() {
     cout << "\nJust a big empty room...  Nothing to see here!\n\n";
     return false;

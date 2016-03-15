@@ -15,11 +15,26 @@ using std::cin;
 using std::endl;
 using std::string;
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: timedMessage
+    Function Parameters: message string, time int
+    What the function does: prints supplied message, then calls usleep with
+                            supplied wait time integer
+*/
 void timedMessage(string message, int waitTime) {
     cout << message;
     usleep(waitTime);
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: getTreasureName
+    Function Parameters: treasure type enum
+    What the function does: checks to see which TREASURES enum type the supplied
+                            treasure param, returning its corresponding string
+                            name, else returns Unknown Item
+*/
 string getTreasureName(TREASURES treasure) {
     if (treasure == SHOTGUN) {
         return "Shotgun";
@@ -32,6 +47,13 @@ string getTreasureName(TREASURES treasure) {
     return "Unknown Item";
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: getItemRegularDescription, getItemSpecialDescription
+    Functions' Parameters: treasure item enum
+    What the functions do: checks treasure type to return corresponding function calls
+                           for either that item's regular or special description
+*/
 string getItemRegularDescription(TREASURES item) {
     if        (item == KEY)      { return getKeyRegularDescription();
     } else if (item == SHOTGUN)  { return getShotgunRegularDescription();
@@ -48,6 +70,14 @@ string getItemSpecialDescription(TREASURES item) {
     return "Unknown special description";
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: getKeyRegularDescription, getKeySpecialDescription
+                    getShotgunRegularDescription, getShotgunSpecialDescription
+                    getBirdseedRegularDescription, getBirdseedSpecialDescription
+    Functions' Parameters: N/A
+    What the functions do: returns string to corresponding item's regular or special description
+*/
 string getKeyRegularDescription() {
     const char *desc =
         "\nYou pull out the shiny golden key.  Surveying the room, it doesn't really look like "

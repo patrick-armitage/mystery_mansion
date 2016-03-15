@@ -1,8 +1,8 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description: Display functions file which defines the functions that were
-** prototyped within the Display header file
+** Description: Game functions file which defines the functions that were
+** prototyped within the Game header file
 *******************************************************************************/
 
 #include <stdio.h>
@@ -25,18 +25,23 @@ using std::vector;
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: changeRoom
-    Function Parameters:
-    What the function does:
+    Function Name: displayRoomOptions
+    Function Parameters: mansion struct, traveler instance
+    What the function does: gets current room and room type from traveler, then
+                            iterates over all the menu options, prompting user
+                            to select between checking current room, using
+                            an inventory item, changing rooms and getting a clue.
+                            Validates user input, forcing a selection between
+                            1-4, then executes selection.  calls checkRoom on
+                            room if user checks room, updating inventory if
+                            user found an item.  Calls useInventoryItem when
+                            user uses an item and giveClue when user asks for a clue
+                            breaks selection loop when user opts to change room
+                            and calls makeMove
 */
 void displayRoomOptions(Mansion *mansion, Traveler *trav) {
     Room *room = trav->getCurrentRoom();
     ROOM_TYPE type = room->getRoomType();
-
-    if (type == OUTSIDE) {
-        room->describe();
-        return;
-    }
 
     char sel;
     int selection;
@@ -72,9 +77,13 @@ void displayRoomOptions(Mansion *mansion, Traveler *trav) {
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: changeRoom
-    Function Parameters:
-    What the function does:
+    Function Name: makeMove
+    Function Parameters: mansion struct, traveler instance
+    What the function does: calls getTravelChoice to get next room choice,
+                            then checks to see if room is outside room, which
+                            conditionally may be locked and the user may not
+                            be able to change rooms.  Otherwise calls change room
+                            with the next room selection
 */
 void makeMove(Mansion *mansion, Traveler *trav) {
     Room *nextRm = getTravelChoice(mansion, trav);
@@ -94,8 +103,15 @@ void makeMove(Mansion *mansion, Traveler *trav) {
 /*----------------------------------------------------------------------------*/
 /*
     Function Name: changeRoom
-    Function Parameters:
-    What the function does:
+    Function Parameters: Traveler instance, next room pointer
+    What the function does: gets the traveler and room name, and chckes to see
+                            that the current room is not NULL, printing an
+                            exit message if it isn't.  Then sets previousRoom
+                            to current room and currentRoom to next room,
+                            checking to see if next room has been visited.  If
+                            not, prints a message saying traveler is entering
+                            for the first time, else prints a message saying
+                            traveler has returned to the room
 */
 void changeRoom(Traveler *trav, Room *nextRm) {
     string travName = trav->getTravelerName();
@@ -120,9 +136,15 @@ void changeRoom(Traveler *trav, Room *nextRm) {
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: changeRoom
-    Function Parameters:
-    What the function does:
+    Function Name: getTravelChoice
+    Function Parameters: mansion struct, traveler instance
+    What the function does: gets the current room then checks each of its room
+                            pointers, printing out options to move to each if
+                            checkRoomRevealed returns true for each option,
+                            then prompts user to make a selection, validating
+                            selection lies within the bounds of available
+                            choices, and returns the room pointer of the user's
+                            selected choice
 */
 Room *getTravelChoice(Mansion *mansion, Traveler *trav) {
     int selection, rmCount = 0;
@@ -180,6 +202,15 @@ Room *getTravelChoice(Mansion *mansion, Traveler *trav) {
     return *(rooms + (selection-1));
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoomRevealed
+    Function Parameters: mansion struct, current room pointer, check room pointer
+    What the function does: checks to see if current room is passageway, then
+                            checks to see if passageRevealed is false and whether
+                            passageway's hidden room equals the check room,
+                            returning false if it does, else returns true
+*/
 bool checkRoomRevealed(Mansion *mansion, Room *currRm, Room *checkRm) {
     bool revealed = true;
 
@@ -194,6 +225,21 @@ bool checkRoomRevealed(Mansion *mansion, Room *currRm, Room *checkRm) {
     return revealed;
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: giveClue
+    Function Parameters: mansion struct, traveler instance
+    What the function does: gets the traveler's inventory, then does a number
+                            of checks to see "where they are at" in the course
+                            of the game.  If outside is unlocked, message is
+                            printed saying no clue necessary!  If user possesses
+                            Key, clue is given asking them to use the key.
+                            If user possess Birdseed, clue is given suggesting
+                            someone may want the birdseed.  If user possesses
+                            shotgun, clue is given urging them to use shotgun.
+                            Otherwise, if inventory is empty, user is encouraged
+                            to explore all the rooms.
+*/
 void giveClue(Mansion *mansion, Traveler *trav) {
     vector<TREASURES> *inv = trav->getInventory();
     const char *msg;
@@ -232,6 +278,13 @@ void giveClue(Mansion *mansion, Traveler *trav) {
     }
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: printGameIntro
+    Function Parameters: N/A
+    What the function does: prints a cool ASCII art intro of the game for a
+                            little eye candy before gameplay starts ;)
+*/
 void printGameIntro() {
     // ASCII art borrowed gratefully from http://ascii.co.uk/art/mansion
     const char *intro =

@@ -25,6 +25,15 @@ Puzzleroom::Puzzleroom(string name) : Room(name) {
     setPuzzleSolved(false);
 }
 
+/*---------------------------------------------------------------------------------------*/
+/*
+    Function Names: setPuzzleSolved, setPuzzleDescription, setWrongItem, setTreasure,
+                    setCorrectItem, getPuzzleSolved, getPuzzleDescription, getWrongItem,
+                    getTreasure, getCorrectItem
+    Functions' Parameters: setters use corresponding values of data members
+    What the functions do: getters and setters which act as public options to
+                           read/write the Inforoom class's private attribute methods
+*/
 void Puzzleroom::setPuzzleSolved(bool solved) {
     puzzleSolved = solved;
 }
@@ -69,7 +78,9 @@ TREASURES Puzzleroom::getTreasure() {
 /*
     Function Name: describe
     Function Parameters: n/a
-    What the function does:
+    What the function does: pure virtual function; prints description and, if puzzle
+                            solved is false, prints magenta message saying there's
+                            somethign going on with the room
 */
 void Puzzleroom::describe() {
     string description = getDescription();
@@ -80,6 +91,13 @@ void Puzzleroom::describe() {
     }
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: describeWrongItem
+    Function Parameters: n/a
+    What the function does: prints humorous message about the crows if wrong item
+                            (shotgun) is used in the room
+*/
 void Puzzleroom::describeWrongItem() {
     cout << "Let's deal with these annoying crows once and for all!\n";
     cout << "Ready...  Aim...  FIRE!\n\n";
@@ -97,6 +115,14 @@ void Puzzleroom::describeWrongItem() {
     timedMessage(string(notAgain, 0, 100), 700000);
 }
 
+/*--------------------------------------------------------------------------------*/
+/*
+    Function Name: checkRoom
+    Function Parameters: n/a
+    What the function does: pure virtual function; if puzzle solved is false,
+                            prints puzzle description, else prints message that
+                            there's nothing unusual, and returns false
+*/
 bool Puzzleroom::checkRoom() {
     if (getPuzzleSolved() == false) {
         cout << getPuzzleDescription();

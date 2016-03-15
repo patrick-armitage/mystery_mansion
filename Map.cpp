@@ -1,8 +1,8 @@
 /*******************************************************************************
 ** Author: Patrick Armitage
 ** Date: 03/12/2016
-** Description: Display functions file which defines the functions that were
-** prototyped within the Display header file
+** Description: Map functions file which defines the functions that were
+** prototyped within the Map header file
 *******************************************************************************/
 
 #include <iostream>
@@ -27,7 +27,12 @@ using std::string;
 /*
     Function Name: createMansion
     Function Parameters: N/A
-    What the function does:
+    What the function does: creates a new mansion struct pointer, which will be
+                            returned at the end of the function, then calls
+                            each room's create function, setting it equal to
+                            the corresponding mansion attribute.  Then calls
+                            setMapAssociations and setHiddenAssocations with
+                            the newly created mansion, and returns mansion
 */
 Mansion *createMansion() {
     Mansion *mansion = new Mansion;
@@ -48,9 +53,12 @@ Mansion *createMansion() {
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: createMansion
-    Function Parameters: N/A
-    What the function does:
+    Function Name: setMapAssociations
+    Function Parameters: Mansion struct pointer
+    What the function does: fetches all the room pointers with the corresponding
+                            getter functions, then works through each of the
+                            individual rooms, setting the correct references to
+                            north, south, east and west rooms as applicable
 */
 void setMapAssociations(Mansion *mansion) {
     Room *grandFoyer = getGrandFoyer(mansion);
@@ -93,6 +101,14 @@ void setMapAssociations(Mansion *mansion) {
     outside->setNorthRoom(grandFoyer);
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: setMapAssociations
+    Function Parameters: Mansion struct pointer
+    What the function does: fetches any passageway rooms using corresponding
+                            getters, then sets each passageway room's hidden
+                            room pointer
+*/
 void setHiddenAssociations(Mansion *mansion) {
     Passagewayroom *library = getPassagewayRoom(mansion, "Library");
     Room *attic = getAttic(mansion);
@@ -267,9 +283,10 @@ Outsideroom *createOutside() {
 /*----------------------------------------------------------------------------*/
 /*
     Function Names: getter functions
-    Function Parameters: N/A
-    What the function does: creates the room its function name suggestions,
-                            populating it with any special functionality
+    Function Parameters: Mansion struct
+    What the function does: using the supplied mansion struct, returns a Room
+                            instance of the room corresponding to each function
+                            name
 */
 Room *getGrandFoyer(Mansion *mansion) {
     Connectorroom *grandFoyer = mansion->grandFoyer;
@@ -319,6 +336,15 @@ Room *getOutside(Mansion *mansion) {
     return outside;
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Names: raw getter functions
+    Function Parameters: Mansion struct, room name string
+    What the function does: using the supplied mansion struct, returns a raw
+                            (re: non-sliced) instance of the corresponding room
+                            subclass and supplied room name string, otherwise
+                            returns NULL
+*/
 Puzzleroom *getPuzzleRoom(Mansion *mansion, string roomName) {
     if (roomName == "Courtyard") {
         return mansion->courtyard;
