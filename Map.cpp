@@ -153,7 +153,7 @@ Connectorroom *createGreatHall() {
         "There are dazzling crystal chandelliers hanging on the long ceiling down the corridor.\n"
         "The lights are on and burning brightly, but there isn't a single soul in sight!\n"
         "Strangely, there is faint organ music playing in the background.  Weird...\n\n"
-        "To the west, there is a large with bright sunlight streaming underneath.\n"
+        "To the west, there is a large double door with bright sunlight streaming underneath.\n"
         "At the north end of the hallway, there is a large metal door with rings for handles.\n"
         "To the east, there is an ornate door with a fancy hand-carved handle, very nice!\n";
     greatHall->setDescription(string(description, 0, MAX));
