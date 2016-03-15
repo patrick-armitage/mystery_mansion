@@ -13,7 +13,6 @@
 #define ROOM_HPP
 
 using std::string;
-using std::printf;
 
 enum ROOM_TYPE { CONNECTOR, INFO, PUZZLE, SECRET, PASSAGEWAY, HIDDEN, OUTSIDE };
 
