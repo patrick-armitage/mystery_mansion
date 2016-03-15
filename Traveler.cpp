@@ -19,11 +19,12 @@ using std::endl;
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: Room
-    Function Parameters: Room's name string
-    What the function does: initializes a new instance of the Room class,
-                            setting room name and also setting stillAlive
-                            boolean to true
+    Function Name: Traveler
+    Function Parameters: Traveler's name string
+    What the function does: initializes a new instance of the Traveler class,
+                            setting traveler name and setting previous and current
+                            rooms to NULL, and inventory to an empty TREASURES
+                            vector
 */
 Traveler::Traveler(string name) {
     setTravelerName(name);
@@ -34,11 +35,11 @@ Traveler::Traveler(string name) {
 
 /*---------------------------------------------------------------------------------------*/
 /*
-    Function Names: setRoomType, setRoomName
-                    getRoomType, getRoomName
+    Function Names: setTravelerName, setPreviousRoom, setCurrentRoom,
+                    getTravelerName, getPreviousRoom, getCurrentRoom, getInventory
     Functions' Parameters: setters use corresponding values of data members
     What the functions do: getters and setters which act as public options to
-                           read/write the Room class's private attribute methods
+                           read/write the Traveler class's private attribute methods
 */
 void Traveler::setTravelerName(string name) {
     travelerName = name;
@@ -68,11 +69,30 @@ vector<TREASURES> *Traveler::getInventory() {
     return inventory;
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: addInventoryItem
+    Function Parameters: treasure item enum
+    What the function does: fetches traveler's current inventory, then calls
+                            push_back on inventory with supplied item
+*/
 void Traveler::addInventoryItem(TREASURES item) {
     vector<TREASURES> *inv = getInventory();
     inv->push_back(item);
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: updateInventory
+    Function Parameters: mansion struct, room pointer
+    What the function does: gets room type, then does a series of checks to see
+                            if room is SECRET, PUZZLE or HIDDEN, getting the
+                            corresponding raw room object for each room type
+                            and checking if treasure has already been found
+                            in each room.  If not, adds treasure item to
+                            inventory and sets treasure found to true for
+                            that room
+*/
 void Traveler::updateInventory(Mansion *mansion, Room *room) {
     ROOM_TYPE type = room->getRoomType();
 
@@ -102,14 +122,13 @@ void Traveler::updateInventory(Mansion *mansion, Room *room) {
 
 /*----------------------------------------------------------------------------*/
 /*
-    Function Name: tryAttack
-    Function Parameters: attacking and defending Rooms' pointers
-    What the function does: gets the two rooms' types and name strings, and
-                            before executing the attack roll, checks the types
-                            to see if there are any special cases occurring.
-                            If the type is Medusa, we must check to see if she
-                            will glare, and if type is Vampire, the vamp may
-                            charm the opponent
+    Function Name: useInventoryItem
+    Function Parameters: mansion struct, room pointer
+    What the function does: fetches traveler's current inventory, then checks to
+                            ensure that inventory is not empty, printing a notice
+                            and returning early if it is.  If not, calls
+                            selectInventoryItem to get item selection from user,
+                            and useItemInRoom with item to use the item
 */
 void Traveler::useInventoryItem(Mansion *mansion, Room *room) {
     vector<TREASURES> *inv = getInventory();
@@ -122,6 +141,16 @@ void Traveler::useInventoryItem(Mansion *mansion, Room *room) {
     useItemInRoom(mansion, room, item);
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: selectInventoryItem
+    Function Parameters: N/A
+    What the function does: fetches traveler's current inventory, then prompts
+                            user to select an item from the inventory, iterating
+                            over each item and printing it as a menu option.
+                            Validates user has made a correct selection, then
+                            returns the treasure enum selection
+*/
 TREASURES Traveler::selectInventoryItem() {
     vector<TREASURES> *inv = getInventory();
     int selection;
@@ -143,6 +172,23 @@ TREASURES Traveler::selectInventoryItem() {
     return inv->at(selection - 1);
 }
 
+/*----------------------------------------------------------------------------*/
+/*
+    Function Name: useItemInRoom
+    Function Parameters: mansion struct, room pointer, treasure enum
+    What the function does: gets room type and name, then does a series of checks
+                            to see if room is PUZZLE, PASSAGEWAY, or if current
+                            room is the Grand Foyer.  If PUZZLE, checks to see
+                            if item used is correct item or wrong item.  If correct,
+                            returns true and updates inventory with found treasure.
+                            If wrong, calls describeWrongItem on Puzzleroom.  If
+                            PASSAGEWAY, checks to see if passage not is revealed and
+                            correct item has been used, if true, returns true and
+                            updates inventory with found treasure.  If Grand Foyer
+                            and item is Key, unlocks the door to the outside and returns.
+                            If specialDescription bool is true, prints specialDescription,
+                            else prints regularDescription for item
+*/
 void Traveler::useItemInRoom(Mansion *mansion, Room *room, TREASURES item) {
     ROOM_TYPE type = room->getRoomType();
     string name = room->getRoomName();
