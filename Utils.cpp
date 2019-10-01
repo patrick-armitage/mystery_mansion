@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include "Utils.hpp"
 
 using std::cout;
